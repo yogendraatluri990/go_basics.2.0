@@ -1,7 +1,12 @@
 package data
 
+import (
+	"fmt"
+	"uuid"
+)
+
 type Position struct {
-	Id   string
+	Id   uuid.UUID
 	Name string
 }
 type Employee struct {
@@ -9,12 +14,29 @@ type Employee struct {
 	Age        int
 	Position   Position
 	Experience string
-	Id         string
+	Id         uuid.UUID
 	Department string
 }
 
+type Employees map[uuid.UUID][]Employee
 type Organization struct {
-	Id        string
+	Id        uuid.UUID
 	Name      string
-	Employees []Employee
+	Employees Employees
+}
+
+func (org *Organization) DisplayOrgInfo() {
+	fmt.Printf("\t %+v\n", *org)
+}
+
+func (org *Organization) DisplayOrgEmployees() {
+	fmt.Println("Employees Len:", len(org.Employees))
+	for _, employee := range org.Employees {
+		fmt.Printf("\t %+v\n", employee)
+	}
+}
+
+type Logger interface {
+	DisplayOrgInfo()
+	DisplayOrgEmployees()
 }

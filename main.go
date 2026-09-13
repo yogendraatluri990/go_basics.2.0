@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "go_basics.2.0/data-access/functions"
 
 func main() {
-	fmt.Println("Hello world")
+	functions.SetOrganization()
 }
